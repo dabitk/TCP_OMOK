@@ -113,6 +113,8 @@ class Player extends Thread{
 	public void broadcast(Board b) throws Exception{ 
 		//옵저버 패턴 적용: 게임상태가 변한 것을 클라이언트들에게 브로드캐스트로 알린다
         synchronized (playerList) {
+        //멀티스레딩 환경에서는 자원에 동시에 접근하는 것을 막기위해 synchronized 키워드를 사용한다
+        //이 메소드가 실행중에는 다른 스레드는 이 메소드를 호출할 수 없다.
             for(ObjectOutputStream p : playerList) {
 				p.writeObject(board);//데이터 직렬화
 				p.reset();	
